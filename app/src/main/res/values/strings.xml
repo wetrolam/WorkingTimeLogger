@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">WorkingTimeLogger</string>
+    <string name="select_wifi">select wifi</string>
+</resources>
