@@ -5,18 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="net.useobjects.workingtime.MainActivity">
+    tools:context="net.useobjects.workingtime.wifi_selection.WifiSelectionActivity">
 
-    <Button
-        android:id="@+id/select_wifi"
-        android:text="@string/select_wifi"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/wifi_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="0dp"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        android:layout_weight="1"
+        >
+    </android.support.v7.widget.RecyclerView>
 
-    <TextView
-        android:id="@+id/selected_bssid"
-        android:text="selected wifi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>
+
+
