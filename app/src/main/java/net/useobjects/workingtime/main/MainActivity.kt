@@ -1,6 +1,7 @@
 package net.useobjects.workingtime
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.support.design.widget.Snackbar
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import net.useobjects.workingtime.main.Settings
 import net.useobjects.workingtime.wifi_selection.WifiSelectionActivity
@@ -23,6 +25,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val preferences = getSharedPreferences(Settings.preferenceFile, Context.MODE_PRIVATE)
+        val bssid = preferences.getString(Settings.BSSID, "")
+        selected_bssid.text = bssid
+
         select_wifi.setOnClickListener { selectWifi() }
     }
 
@@ -37,6 +43,12 @@ class MainActivity : AppCompatActivity() {
 
         if( requestCode == SELECT_WIFI_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
             val bssid: String = data!!.getStringExtra(Settings.BSSID)
+
+            val preferences = getSharedPreferences(Settings.preferenceFile, Context.MODE_PRIVATE)
+            val editor = preferences.edit()
+            editor.putString(Settings.BSSID, bssid)
+            editor.commit()
+
             Snackbar.make(selected_bssid, "selected $bssid", Snackbar.LENGTH_SHORT).show()
             selected_bssid.text = "selected $bssid"
         }
